@@ -26,6 +26,10 @@ A GitHub Action for rendering `*.drawio` files generated with [diagrams.net](htt
 
 ## Inputs
 
+### `GitHub Actions Secret`
+
+To enable GitHub Actions to push changes to your repository, you must provide it with a GitHub Personal Access Token. For those unfamiliar with the process, refer to the documentation to learn [how to generate a token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic). Once generated, securely store this token as a GitHub Actions secret. Consult the documentation for detailed instructions on [how to add and manage secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions) within your repository's GitHub Actions settings.
+
 ### `formats`
 
 **Optional:** A comma-separated list of the formats to render. All supported formats: `svg,pdf,png,jpg`
@@ -108,6 +112,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      token: ${{ secrets.GH_TOKEN }}
     - name: Render .drawio files
       uses: docker://ghcr.io/racklet/render-drawio-action:v1
       with: # Showcasing the default values here
